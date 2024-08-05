@@ -25,7 +25,12 @@ URL:            https://percona.com
 Source0:        https://%{import_path}/archive/v%{version}/%{repo}-v%{version}.tar.gz
 BuildRequires:  golang
 
-Requires: perl-DBI, perl-DBD-MySQL, MariaDB-shared
+Requires: perl(DBI)
+Requires: perl(DBD::mysql)
+Requires: perl(Time::HiRes)
+Requires: perl(IO::Socket::SSL)
+Requires: perl(Digest::MD5)
+Requires: perl(Term::ReadKey)
 
 %description
 Percona Toolkit (Shattered Silicon Build)
