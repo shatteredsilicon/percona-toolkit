@@ -1,0 +1,33 @@
+#!/usr/bin/make -f
+
+# Uncomment this to turn on verbose mode.
+export DH_VERBOSE=1
+
+%:
+	dh $@ --with systemd
+
+SHELL=/bin/bash
+TMP=$(CURDIR)/debian/tmp
+
+export PATH:=/usr/lib/go-1.19/bin:$(PATH)
+export GOPATH=$(CURDIR)/go
+export GOROOT=/usr/lib/go-1.19
+export CGO_ENABLED=0
+
+override_dh_auto_build:
+	mkdir -p $(GOPATH)/bin
+
+	tar -zxf percona-toolkit*.tar.gz
+	patch -p1 -d percona-toolkit-%{_version} < 0001-Fix-transparent-huge-pages-status-check.patch
+
+	cd percona-toolkit-%{_version} && \
+		go install -ldflags="-s -w" -mod=vendor ./src/go/...
+
+	cp percona-toolkit-%{_version}/bin/* $(GOPATH)/bin/
+
+override_dh_auto_install:
+	@echo "RULES.$@"
+	install -d $(TMP)
+	install -d $(TMP)/bin/
+
+	cp $(GOPATH)/bin/* $(TMP)/bin/
