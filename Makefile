@@ -21,6 +21,7 @@ $(SRPM_FILE):
 	sed -i -E 's/%\{\??_version\}/$(VERSION)/g' $(BUILDDIR)/rpmbuild/SPECS/percona-toolkit.spec
 	sed -i -E 's/%\{\??_release\}/$(RELEASE)/g' $(BUILDDIR)/rpmbuild/SPECS/percona-toolkit.spec
 	spectool -C $(BUILDDIR)/rpmbuild/SOURCES -g $(BUILDDIR)/rpmbuild/SPECS/percona-toolkit.spec
+	cp 0001-Fix-transparent-huge-pages-status-check.patch $(BUILDDIR)/rpmbuild/SOURCES/
 
 	tar -C $(BUILDDIR)/rpmbuild/SOURCES/ -zxf $(BUILDDIR)/rpmbuild/SOURCES/percona-toolkit-v$(VERSION).tar.gz
 	cd $(BUILDDIR)/rpmbuild/SOURCES/percona-toolkit-$(VERSION) && go mod vendor && tar -czf $(BUILDDIR)/rpmbuild/SOURCES/percona-toolkit-v$(VERSION).tar.gz -C $(BUILDDIR)/rpmbuild/SOURCES percona-toolkit-$(VERSION)

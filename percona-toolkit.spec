@@ -23,6 +23,7 @@ License:        GPL-2.0
 Vendor:         Percona LLC
 URL:            https://percona.com
 Source0:        https://%{import_path}/archive/v%{version}/%{repo}-v%{version}.tar.gz
+Patch0:         0001-Fix-transparent-huge-pages-status-check.patch
 BuildRequires:  golang
 
 Requires: perl(DBI)
@@ -37,6 +38,7 @@ Percona Toolkit (Shattered Silicon Build)
 
 %prep
 %setup -q -n %{repo}-%{version}
+%patch0 -p1
 
 %build
 mkdir -p %{_GOPATH}/bin
