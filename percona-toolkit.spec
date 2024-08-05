@@ -41,6 +41,7 @@ Percona Toolkit (Shattered Silicon Build)
 %build
 mkdir -p %{_GOPATH}/bin
 export GOPATH=%{_GOPATH}
+export CGO_ENABLED=0
 
 go install -ldflags="-s -w" ./src/go/...
 %{__cp} bin/* %{_GOPATH}/bin
