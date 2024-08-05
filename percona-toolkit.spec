@@ -15,7 +15,7 @@ Version:        3.5.7
 Version:        %{_version}
 %endif
 %if "0%{?_release}" == "0"
-Release:        2%{?dist}
+Release:        2
 %else
 Release:        %{_release}
 %endif
