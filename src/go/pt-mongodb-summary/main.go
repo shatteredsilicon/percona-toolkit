@@ -1142,7 +1142,7 @@ func getClientOptions(opts *cliOptions) (*options.ClientOptions, error) {
 
 func getTLSConfig(sslPEMKeyFile, sslCAFile string) (*tls.Config, error) {
 	tlsConfig := &tls.Config{
-		MinVersion:         tls.VersionTLS10,
+		MinVersion:         tls.VersionTLS12,
 		InsecureSkipVerify: true,
 	}
 
